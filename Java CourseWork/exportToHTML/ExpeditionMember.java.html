@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>ExpeditionMember.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #33ccff; font-weight: bold;}
+.s4 { color: #7ec3e6;}
+.s5 { color: #54b33e;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ExpeditionMember.java</font>
+</center></td></tr></table>
+<pre><span class="s0">public class </span><span class="s1">ExpeditionMember {</span>
+    <span class="s0">private </span><span class="s1">String memName</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">studentID</span><span class="s2">;</span>
+
+
+    <span class="s0">public static int </span><span class="s1">member_counter = </span><span class="s3">0</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">ExpeditionMember(String MemName</span><span class="s2">, </span><span class="s0">int </span><span class="s1">studentID) {</span>
+        <span class="s1">setMemName(MemName)</span><span class="s2">;</span>
+        <span class="s1">setStudentID(studentID)</span><span class="s2">;</span>
+        <span class="s1">member_counter++</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getExpMember() {</span>
+        <span class="s0">return </span><span class="s1">memName</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setMemName(String name) {</span>
+        <span class="s0">this</span><span class="s1">.memName = name</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getStudentID(){</span>
+        <span class="s0">return </span><span class="s1">studentID</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setStudentID(</span><span class="s0">int </span><span class="s1">studentID) {</span>
+        <span class="s0">if </span><span class="s1">(studentID &lt; </span><span class="s3">0</span><span class="s1">) { </span><span class="s4">// Prevent negative IDs</span>
+            <span class="s1">System.out.println(</span><span class="s5">&quot;Invalid Student ID: It cannot be negative.&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s1">}</span>
+        <span class="s0">this</span><span class="s1">.studentID = studentID</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

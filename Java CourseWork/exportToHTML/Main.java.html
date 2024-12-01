@@ -1,0 +1,163 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #7ec3e6;}
+.s4 { color: #54b33e;}
+.s5 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.Random</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Main {</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s3">// Arrays for names and student IDs</span>
+        <span class="s1">String[] allNames = {</span><span class="s4">&quot;Ali&quot;</span><span class="s2">, </span><span class="s4">&quot;Timothy&quot;</span><span class="s2">, </span><span class="s4">&quot;Dominic&quot;</span><span class="s2">, </span><span class="s4">&quot;Olivia&quot;</span><span class="s2">, </span><span class="s4">&quot;Sophia&quot;</span><span class="s1">}</span><span class="s2">;</span>
+        <span class="s1">String[] allStudentIDs = {</span><span class="s4">&quot;EM2629&quot;</span><span class="s2">, </span><span class="s4">&quot;EM4756&quot;</span><span class="s2">, </span><span class="s4">&quot;EM7215&quot;</span><span class="s2">, </span><span class="s4">&quot;EM5847&quot;</span><span class="s2">, </span><span class="s4">&quot;EM5063&quot;</span><span class="s1">}</span><span class="s2">;</span>
+
+        <span class="s3">// Step 2: Create the pool of expedition members</span>
+        <span class="s1">Random random = </span><span class="s0">new </span><span class="s1">Random()</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">numMembers = random.nextInt(</span><span class="s5">3</span><span class="s1">) + </span><span class="s5">4</span><span class="s2">; </span><span class="s3">// Random number between 4 and 6</span>
+
+        <span class="s3">// List to store selected members and to track used indices</span>
+        <span class="s1">ArrayList&lt;ExpeditionMember&gt; memberList = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span>
+        <span class="s1">ArrayList&lt;Integer&gt; usedIndices = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span>
+
+        <span class="s3">// Randomly pick members until we have enough</span>
+        <span class="s0">while </span><span class="s1">(memberList.size() &lt; numMembers) {</span>
+            <span class="s0">int </span><span class="s1">randomIndex = random.nextInt(allNames.length)</span><span class="s2">;</span>
+            <span class="s0">if </span><span class="s1">(!usedIndices.contains(randomIndex)) { </span><span class="s3">// Avoid duplicates</span>
+                <span class="s1">usedIndices.add(randomIndex)</span><span class="s2">;</span>
+
+                <span class="s3">// Get the numeric part of the student ID</span>
+                <span class="s0">int </span><span class="s1">studentID = Integer.parseInt(allStudentIDs[randomIndex].substring(</span><span class="s5">2</span><span class="s1">))</span><span class="s2">;</span>
+
+                <span class="s3">// Create an expedition member and add to the list</span>
+                <span class="s1">ExpeditionMember member = </span><span class="s0">new </span><span class="s1">ExpeditionMember(allNames[randomIndex]</span><span class="s2">, </span><span class="s1">studentID)</span><span class="s2">;</span>
+                <span class="s1">memberList.add(member)</span><span class="s2">; </span><span class="s3">// Add the member to the list</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s3">// Convert the list to an array for easier access</span>
+        <span class="s1">ExpeditionMember[] members = memberList.toArray(</span><span class="s0">new </span><span class="s1">ExpeditionMember[</span><span class="s5">0</span><span class="s1">])</span><span class="s2">;</span>
+
+        <span class="s3">// Step 3: Set up expeditions</span>
+        <span class="s0">if </span><span class="s1">(members.length &gt;= </span><span class="s5">3</span><span class="s1">) {</span>
+            <span class="s3">// Assign roles for the Pyramid Expedition</span>
+            <span class="s1">ResearchExpedition pyramidExpedition = </span><span class="s0">new </span><span class="s1">ResearchExpedition(members[</span><span class="s5">0</span><span class="s1">]</span><span class="s2">, </span><span class="s1">members[</span><span class="s5">1</span><span class="s1">]</span><span class="s2">, </span><span class="s1">members[</span><span class="s5">2</span><span class="s1">])</span><span class="s2">;</span>
+
+            <span class="s3">// Assign roles for the Nile Expedition</span>
+            <span class="s1">ResearchExpedition nileExpedition = </span><span class="s0">new </span><span class="s1">ResearchExpedition(</span>
+                    <span class="s1">members[members.length - </span><span class="s5">3</span><span class="s1">]</span><span class="s2">,</span>
+                    <span class="s1">members[members.length - </span><span class="s5">2</span><span class="s1">]</span><span class="s2">,</span>
+                    <span class="s1">members[members.length - </span><span class="s5">1</span><span class="s1">]</span>
+            <span class="s1">)</span><span class="s2">;</span>
+
+            <span class="s3">// Display Pyramid Expedition members</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Pyramid Expedition Team:&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Leader: &quot; </span><span class="s1">+ pyramidExpedition.getExpeditionLeader().getExpMember())</span><span class="s2">;</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Archivist: &quot; </span><span class="s1">+ pyramidExpedition.getArchivist().getExpMember())</span><span class="s2">;</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Researcher: &quot; </span><span class="s1">+ pyramidExpedition.getFieldResearcher().getExpMember())</span><span class="s2">;</span>
+
+            <span class="s3">// Display Nile Expedition members</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">Nile Expedition Team:&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Leader: &quot; </span><span class="s1">+ nileExpedition.getExpeditionLeader().getExpMember())</span><span class="s2">;</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Archivist: &quot; </span><span class="s1">+ nileExpedition.getArchivist().getExpMember())</span><span class="s2">;</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Researcher: &quot; </span><span class="s1">+ nileExpedition.getFieldResearcher().getExpMember())</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s3">// Step 4: Check if member counter matches</span>
+        <span class="s1">System.out.println(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">Checking Member Count...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">if </span><span class="s1">(ExpeditionMember.member_counter == members.length) {</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Everything is good! The counter matches the number of members.&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s4">&quot;Oops! Something is wrong. The counter doesn't match the number of members.&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+
+
+
+
+
+
+
+
+
+<span class="s3">//  code befor asking chat fixing?</span>
+<span class="s3">//            String[] allNames = {&quot;Ali&quot;, &quot;Timothy&quot;, &quot;Dominic&quot;, &quot;Olivia&quot;, &quot;Sophia&quot;};</span>
+<span class="s3">//            String[] allStudentIDs = {&quot;EM2629&quot;, &quot;EM4756&quot;, &quot;EM7215&quot;, &quot;EM5847&quot;, &quot;EM5063&quot;};</span>
+<span class="s3">//</span>
+<span class="s3">//            // Step 2: Set up the member pool</span>
+<span class="s3">//            Random random = new Random();</span>
+<span class="s3">//            int numMembers = random.nextInt(3) + 4; // Randomly choose between 4 and 6 members</span>
+<span class="s3">//</span>
+<span class="s3">//            ArrayList&lt;ExpeditionMember&gt; membersList = new ArrayList&lt;&gt;();</span>
+<span class="s3">//            ArrayList&lt;Integer&gt; usedIndices = new ArrayList&lt;&gt;(); // To ensure no duplicate selections</span>
+<span class="s3">//</span>
+<span class="s3">//            while (membersList.size() &lt; numMembers) {</span>
+<span class="s3">//                int randomIndex = random.nextInt(allNames.length); // Random index from the pool</span>
+<span class="s3">//                if (!usedIndices.contains(randomIndex)) { // Ensure no duplicates</span>
+<span class="s3">//                    usedIndices.add(randomIndex); // Mark index as used</span>
+<span class="s3">//                    // Create an ExpeditionMember and add to the list</span>
+<span class="s3">//                    int numericID = Integer.parseInt(allStudentIDs[randomIndex].substring(2)); // Extract numeric part</span>
+<span class="s3">//                    ExpeditionMember member = new ExpeditionMember(allNames[randomIndex], numericID);</span>
+<span class="s3">//                }</span>
+<span class="s3">//            }</span>
+<span class="s3">//</span>
+<span class="s3">//            // Convert the list to an array for easier indexing</span>
+<span class="s3">//            ExpeditionMember[] members = membersList.toArray(new ExpeditionMember[0]);</span>
+<span class="s3">//</span>
+<span class="s3">//            // Step 3: Create expeditions</span>
+<span class="s3">//            if (members.length &gt;= 3) {</span>
+<span class="s3">//                // Create pyramidExpedition with the first three members</span>
+<span class="s3">//                ResearchExpedition pyramidExpedition = new ResearchExpedition(members[0], members[1], members[2]);</span>
+<span class="s3">//</span>
+<span class="s3">//                // Create nileExpedition with the last three members</span>
+<span class="s3">//                ResearchExpedition nileExpedition = new ResearchExpedition(</span>
+<span class="s3">//                        members[members.length - 3],</span>
+<span class="s3">//                        members[members.length - 2],</span>
+<span class="s3">//                        members[members.length - 1]</span>
+<span class="s3">//                );</span>
+<span class="s3">//</span>
+<span class="s3">//                // Print details of pyramid expedition</span>
+<span class="s3">//                System.out.println(&quot;Pyramid Expedition Core Members:&quot;);</span>
+<span class="s3">//                System.out.println(&quot;Expedition Leader: &quot; + pyramidExpedition.getExpeditionLeader().getExpMember());</span>
+<span class="s3">//                System.out.println(&quot;Archivist: &quot; + pyramidExpedition.getArchivist().getExpMember());</span>
+<span class="s3">//                System.out.println(&quot;Field Researcher: &quot; + pyramidExpedition.getFieldResearcher().getExpMember());</span>
+<span class="s3">//</span>
+<span class="s3">//                // Print details of nile expedition</span>
+<span class="s3">//                System.out.println(&quot;\nNile Expedition Core Members:&quot;);</span>
+<span class="s3">//                System.out.println(&quot;Expedition Leader: &quot; + nileExpedition.getExpeditionLeader().getExpMember());</span>
+<span class="s3">//                System.out.println(&quot;Archivist: &quot; + nileExpedition.getArchivist().getExpMember());</span>
+<span class="s3">//                System.out.println(&quot;Field Researcher: &quot; + nileExpedition.getFieldResearcher().getExpMember());</span>
+<span class="s3">//            }</span>
+<span class="s3">//</span>
+<span class="s3">//            // Step 4: Output and Verification</span>
+<span class="s3">//            System.out.println(&quot;\nVerification:&quot;);</span>
+<span class="s3">//            if (ExpeditionMember.member_counter == members.length) {</span>
+<span class="s3">//                System.out.println(&quot;SUCCESS: member_counter matches the number of members.&quot;);</span>
+<span class="s3">//            } else {</span>
+<span class="s3">//                System.out.println(&quot;ERROR: member_counter does not match the number of members.&quot;);</span>
+<span class="s3">//            }</span>
+<span class="s3">//        }</span>
+<span class="s3">//}</span>
+<span class="s3">//</span>
+
+
+</pre>
+</body>
+</html>
